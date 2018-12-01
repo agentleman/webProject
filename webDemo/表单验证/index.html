@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="view-port" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html">
+    <meta name="keywords" content="keywords">
+    <title>JS实现生成随机验证码并验证功能</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+    <div class="wrap">
+        <input type="text" id="pass_word" placeholder="请输入验证码">
+        <a href="javascript" class="random_code" onclick="changCode(event)"></a>
+        <input type="button" value="验证" id="btn" onclick="getCode()">
+    </div>
+</body>
+<script type="text/javascript">
+var User = document.getElementById('pass_word');
+var code = document.getElementsByClassName('random_code')[0];
+/**
+ * 页面加载完成是调用createCode函数，生成随机验证码
+ */
+window.onload = createCode();
+
+/**
+ * 随机验证码生成函数
+ * 返回 数组codeArr
+ */
+function createCode() {
+    var codeArr = [];
+
+    for (var i = 0; i < 4; i++) {
+        var num = Math.floor(Math.random() * 10);
+        if (num < 3) {
+            var asciiNum = Math.floor(Math.random() * 10);
+            codeArr.push(asciiNum);
+        } else if (num > 3 && num < 7) {
+            var asciiUpper = Math.floor(Math.random() * 26) + 65;
+            var upperCase = String.fromCharCode(asciiUpper);
+            codeArr.push(upperCase);
+        } else {
+            var asciiLowCase = Math.floor(Math.random() * 26) + 97;
+            var lowerCase = String.fromCharCode(asciiLowCase);
+            codeArr.push(lowerCase)
+        }
+    }
+    var codeStr = codeArr.join('');
+    code.innerText = codeStr;
+    return codeStr;
+}
+
+/**
+ * 实现用户切换随机验证码的功能,阻止a标签的默认跳转行为
+ */
+
+function changCode(e) {
+    e.preventDefault();
+    createCode();
+}
+
+
+/**
+ * 获取客户端用户输入的字符
+ * 返回一个字符串对象 
+ */
+function getCode() {
+    var userCode = User.value;
+    var randomCode = code.innerText;
+    judgeCode(userCode, randomCode);
+}
+
+/**
+ * 判断用户输入的字符是否与随机验证码一致
+ * 一致返回true，不一致提示重新输入	
+ */
+function judgeCode(user, random) {
+    if (user !== random) {
+        alert('请输入正确的验证码')
+    } else {
+        alert('成功啦！！！')
+    }
+    // window.location.assign("http://www.baidu.com");
+    window.location.href = "http://www.baidu.com";
+}
+</script>
+
+</html>
