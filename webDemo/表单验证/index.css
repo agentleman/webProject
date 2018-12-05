@@ -30,6 +30,7 @@
 	font-size: 14PX;
 	outline: none;
 	border: 1px solid #eee;
+	cursor: default;
 }
 #btn{
 	width: 50px;

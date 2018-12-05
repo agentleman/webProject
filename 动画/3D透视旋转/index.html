@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>3D透视旋转</title>
+</head>
+<link rel="stylesheet" type="text/css" href="index.css">
+
+<body>
+    <div id="wrap">
+        <img src="https://dpic3.tiankong.com/c6/d3/QJ6102980711.jpg?x-oss-process=style/240h" alt="加载中……">
+        <img src="https://dpic2.tiankong.com/bs/w8/QJ6715142166.jpg?x-oss-process=style/240h" alt="">
+        <img src="http://img3.imgtn.bdimg.com/it/u=2283879916,3576637197&fm=200&gp=0.jpg" alt="">
+        <img src="http://img2.imgtn.bdimg.com/it/u=4223895883,3610383341&fm=200&gp=0.jpg" alt="">
+        <img src="https://dpic3.tiankong.com/n0/jz/QJ6937835023.jpg?x-oss-process=style/240h" alt="">
+        <img src="https://dpic2.tiankong.com/aj/g3/QJ6924042146.jpg?x-oss-process=style/240h" alt="">
+        <img src="https://dpic1.tiankong.com/hf/xf/QJ6659668105.jpg?x-oss-process=style/240h" alt="">
+        <img src="https://dpic3.tiankong.com/6k/dc/QJ8184371747.jpg?x-oss-process=style/240h" alt="">
+        <img src="https://dpic3.tiankong.com/gf/3k/QJ6780657823.jpg?x-oss-process=style/240h" alt="">
+        <img src="https://dpic3.tiankong.com/67/n0/QJ8616689027.jpg?x-oss-process=style/240h" alt="">
+        <img src="https://dpic1.tiankong.com/zh/h5/QJ6395012397.jpg?x-oss-process=style/240h" alt="">
+        <img src="http://img4.imgtn.bdimg.com/it/u=3955091194,2786741134&fm=200&gp=0.jpg" alt="">
+	</div>
+</body>
+<script>
+window.onload = function() {
+    var wrap = document.getElementById('wrap');
+    var oImg = document.getElementsByTagName('img');
+    var everyDeg = 360 / oImg.length;
+    //声明代表rotateX和rotateY旋转角度的变量
+
+    var x, y, x_, y_, xNum, yNum, time = null
+    var rX = -10;
+    var rY = 0;
+    for (var i = 0; i < oImg.length; i++) {
+        // oImg[i].style.cssText = 'transform:rotateY(' + i * everyDeg + 'deg ) translateZ(350px) ;transition:all 1s' + (oImg.length - i) * 0.1 + 's';
+        oImg[i].style.transform = 'rotateY(' + i * everyDeg + 'deg) translateZ(350px)';
+        oImg[i].style.transition = 'all 1s ease ' +(oImg.length-i-1) * 0.1 + 's';
+        oImg[i].ondragstart = function() {
+            return false;
+        }
+    }
+    /**
+     * 鼠标事件
+     */
+    document.onmousedown = function(event) {
+        //鼠标按下的时候清除惯性效果
+        clearInterval(time);
+        event = event || window.event;
+        x_ = event.clientX;
+        y_ = event.clientY;
+        this.onmousemove = function(event) {
+            event = event || window.event;
+
+            //client:鼠标触发点相对于页面可视区域左上角距离
+            x = event.clientX;
+            y = event.clientY;
+
+            //定义X方向和Y方向差值为xNum,yNum
+            xNum = x - x_;
+            yNum = y - y_;
+            //差值拼接到旋转的Y里面去
+            rY += xNum * 0.2; //水平拖影响Y轴;
+            rX -= yNum * 0.2; //竖直拖影响X轴
+
+            wrap.style.transform = 'perspective(800px) rotateX(' + rX + 'deg) rotateY(' + rY + 'deg)';
+            //这里是把move状态末鼠标坐标重新初始化，
+            x_ = event.clientX;
+            y_ = event.clientY;
+            // console.log(rX, rY, x_, y_)
+        }
+        this.onmouseup = function(event) {
+            this.onmousemove = null;
+            event = event || window.event;
+            //设置时间函数实现惯性效果
+            time = setInterval(function() {
+
+                //无限乘以0.95它会接近0的状态
+                xNum *= 0.95;
+                yNum *= 0.95;
+                //当它小到0.1时停止计时器
+                if (Math.abs(xNum) < 0.1 && Math.abs(yNum) < 0.1) { //Math.abs()是返回绝对值
+                    clearInterval(time);
+                }
+                //差值拼接到旋转的Y里面去
+                rY += xNum * 0.2; //水平拖影响Y轴;
+                rX -= yNum * 0.2;
+                wrap.style.transform = 'perspective(800px) rotateX(' + rX + 'deg) rotateY(' + rY + 'deg)';
+
+            }, 30)
+        }
+    }
+}
+</script>
+
+</html>

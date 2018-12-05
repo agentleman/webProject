@@ -18,6 +18,7 @@
     </div>
 </body>
 <script type="text/javascript">
+'use strict'
 var User = document.getElementById('pass_word');
 var code = document.getElementsByClassName('random_code')[0];
 /**
@@ -53,7 +54,8 @@ function createCode() {
 }
 
 /**
- * 实现用户切换随机验证码的功能,阻止a标签的默认跳转行为
+ * 实现用户切换随机验证码的功能,
+ * 阻止a标签的默认跳转行为
  */
 
 function changCode(e) {
@@ -74,17 +76,30 @@ function getCode() {
 
 /**
  * 判断用户输入的字符是否与随机验证码一致
- * 一致返回true，不一致提示重新输入	
+ * 一致返回true，不一致提示重新输入   
  */
 function judgeCode(user, random) {
     if (user !== random) {
-        alert('请输入正确的验证码')
+        alert('验证码不正确，请重新输入！');
+        User.value='';
+        return
     } else {
-        alert('成功啦！！！')
+        alert('验证码正确，\n确认后自动跳转……')
     }
     // window.location.assign("http://www.baidu.com");
     window.location.href = "http://www.baidu.com";
+    User.value='';
 }
+
+/**
+ * 检测enter事件，
+ * 如果按键是enter，判断验证码是否正确，
+ */
+User.onkeypress= function(event) {
+    if (event.keyCode===13) {
+        getCode()
+    }
+};
 </script>
 
 </html>
