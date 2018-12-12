@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Document</title>
+    </head>
+    <style rel="stylesheet" type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .banner {
+            width: 640px;
+            height: 300px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .inner {
+            width: 9999px;
+            position: relative;
+            animation: aaa 16s infinite 2s running;
+        }
+
+        @keyframes aaa {
+            0% {
+                transform: translateX(0px);
+            }
+
+            5% {
+                transform: translateX(-640px);
+            }
+
+            25% {
+                transform: translateX(-640px);
+            }
+
+            30% {
+                transform: translateX(-1280px);
+            }
+
+            50% {
+                transform: translateX(-1280px);
+            }
+
+            55% {
+                transform: translateX(-1920px);
+            }
+
+            75% {
+                transform: translateX(-1920px);
+            }
+
+            80% {
+                transform: translateX(-2560px);
+            }
+
+            100% {
+                transform: translateX(-2560px);
+            }
+        }
+
+        .inner:hover {
+            animation-play-state: paused;
+            cursor: pointer;
+        }
+
+        .innerwrapper {
+            float: left;
+            width: 640pxpx;
+        }
+
+        .banner img {
+            width: 640px;
+            height: 300px;
+        }
+    </style>
+    <body>
+        <div class="banner">
+            <div class="inner">
+                <div class="innerwrapper">
+                    <img src="https://dpic1.tiankong.com/vr/zc/QJ8149776057.jpg?x-oss-process=style/240h" alt="banner1">
+                </div>
+                <div class="innerwrapper">
+                    <img src="https://dpic1.tiankong.com/8v/z8/QJ6250608417.jpg?x-oss-process=style/240h" alt="banner2">
+                </div>
+                <div class="innerwrapper">
+                    <img src="https://dpic3.tiankong.com/pm/nt/QJ7100677491.jpg?x-oss-process=style/240h" alt="banner3">
+                </div>
+                <div class="innerwrapper">
+                    <img src="https://dpic.tiankong.com/5d/xe/QJ8161949912.jpg?x-oss-process=style/240h" alt="banner4">
+                </div>
+                <div class="innerwrapper">
+                    <img src="https://dpic1.tiankong.com/z9/rn/QJ6750197389.jpg?x-oss-process=style/240h" alt="banner1">
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+

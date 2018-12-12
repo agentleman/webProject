@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>原生js移动端轮播插件</title>
+</head>
+<style>
+body,
+ul {
+    margin: 0;
+}
+ul {
+    padding-left: 0;
+}
+li {
+    list-style: none;
+}
+img {
+    display: block;
+}
+.content {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.swiper {
+    width: 100vw;
+    height: 60vh;
+    overflow: hidden;
+    /*background: yellow;*/
+}
+.swiper ul {
+    width: 500vw;
+    height: 60vh;
+    transform: translateZ(0);
+}
+.swiper ul li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: left;
+    width: 100vw;
+    height: 60vh;
+
+}
+.swiper li img {
+    width: 80%;
+    height: 80%;
+    border-radius: 3vw;
+    transition: all ease 1s;
+}
+.swiper .bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+.swiper .bg img {
+    width: 100%;
+    height: 100%;
+    filter: blur(20px);
+}
+</style>
+
+<body>
+    <div class="content">
+        <div class="swiper">
+            <div class="bg"><img src="../../common/image/1.jpg" alt=""></div>
+                <ul>
+                    <li><img src="../../common/image/3.jpg" alt=""></li>
+                    <li><img src="../../common/image/2.jpg" alt=""></li>
+                    <li><img src="../../common/image/1.jpg" alt=""></li>
+                    <li><img src="../../common/image/4.jpg" alt=""></li>
+                    <li><img src="../../common/image/5.jpg" alt=""></li>
+                </ul>
+            </div>
+        </div>
+</body>
+<script>
+var oSwiper = document.getElementsByClassName('swiper')[0];
+var oUl = document.querySelector('ul');
+var aLi = document.querySelectorAll('li');
+
+oSwiper.addEventListener("touchstart", touch);
+oSwiper.addEventListener("touchmove", touch);
+oSwiper.addEventListener("touchend", touch);
+var x1, x2, startX, sX, distanceX, clientNum;
+
+function touch(ev) {
+    ev = ev || window.event;
+    sW = document.body.scrollWidth;
+    ev.preventDefault();
+    // console.log(ev)
+    switch (ev.type) {
+        case "touchstart":
+            x1 = ev.changedTouches[0].clientX;
+            regExp = /\-?[0-9]+\.?[0-9]*/g;
+            startX = Number(oUl.style.transform.toString().match(regExp));
+            oUl.style.transition = 'all ease 0 ';
+            clientNum = Math.floor(startX / sW);
+            console.log('开启', clientNum, startX)
+            break;
+        case "touchmove":
+            x2 = ev.changedTouches[0].clientX;
+            nowX = startX + x2 - x1;
+            oUl.style.transform = "translateX(" + nowX + "px)"
+            break;
+        case "touchend":
+            x2 = ev.changedTouches[0].clientX;
+            if ((Math.abs(x2 - x1)) > (sW / 2) && x2 > x1) {
+                if (clientNum == 0) {
+                    clientNum = -5;
+                }
+                moveX = (clientNum + 1) * sW;
+                oUl.style.transform = "translateX(" + moveX + "px)"
+            } else if ((Math.abs(x2 - x1)) > (sW / 2) && x2 < x1) {
+                if (clientNum == -4) {
+                    clientNum = 1;
+                }
+                moveX = (clientNum - 1) * sW;
+                oUl.style.transform = "translateX(" + moveX + "px)";
+                oUl.style.transition = 'all ease 0.75s';
+            } else {
+                oUl.style.transform = "translateX(" + startX + "px)"
+            }
+            break;
+    }
+}
+
+// function cssTransform(obj, attr, val) {
+
+//     if (!obj.ps) {
+//         obj.ps = {}
+//     }
+//     switch (arguments.length) {
+//         case 2:
+//             return obj.ps[attr] || 0;
+//             break;
+//         case 3:
+//             obj.ps[attr] = val;
+//             var str = "";
+//             console.log(str)
+//             // alert(0)
+//             for (var key in obj.ps) {
+//                 switch (key) {
+//                     case "translate":
+//                     case "translateX":
+//                     case "translateY":
+//                     case "translateZ":
+//                         str += key + "(" + obj.ps[key] + "px)";
+
+//                         break;
+//                         console.log(str)
+//                         console.log(key)
+//                 }
+
+//             }
+//             console.log(str)
+//             obj.style.transform = str;
+//             break;
+//     }
+// }
+</script>
+
+</html>

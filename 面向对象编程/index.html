@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+</body>
+
+</html>
+<script>
+var active = {
+    "yagami": {
+        "forward": function() {},
+        "reteat": function() {},
+        "jump": function() {},
+        "pullDown": function() {},
+        "boom": function() {}
+    },
+    "nuoshou": {
+        "forward": function() {},
+        "reteat": function() {},
+        "jump": function() {},
+        "pullDown": function() {},
+        "boom": function() {}
+    },
+    "monkey": {
+        "forward": function() {},
+        "reteat": function() {},
+        "jump": function() {},
+        "pullDown": function() {},
+        "boom": function() {}
+    },
+    "dema": {
+        "forward": function() {},
+        "reteat": function() {},
+        "jump": function() {},
+        "pullDown": function() {},
+        "boom": function() {}
+    }
+}
+
+
+function skill() {
+    "68": "forward",
+    "65": "retreat",
+    "87": "jump",
+    "83": "pullDown",
+    "79": "boom"
+}
+
+//创建指令方法
+function makeCommoands(obj, key) {
+
+    var activeName = skill[key];
+    if (!activeName) {
+        return null
+    }
+
+    return function() {
+        //可执行的动作指令
+    }
+}
+
+
+//
+//什么键对应什么指令动作
+
+
+
+function Person() {
+
+}
+
+var yaganmi = new Person(yaganmi)
+
+document.onkeydown = function(event) {
+    var key = event.keyCode;
+    var command = makeCommoands(yaganmi.key)
+    if (command) {
+
+    }
+}
+</script>
