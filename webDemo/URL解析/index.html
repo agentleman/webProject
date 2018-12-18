@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>将URL中的参数解析成对象</title>
+</head>
+
+<body>
+</body>
+<script>
+function url2obj(obj) {
+    var results = {};
+    var params = obj.split('?');
+    var keys = params[1].split('&');
+    keys.forEach(function(item, index) {
+        var values = item.split('=');
+        results[index] = values[0];
+    })
+    return results
+}
+
+function paramsObject(obj) {
+    var results = {};
+    var paramsStr = obj.split('?')[1];
+    var paramsArr = paramsStr.split('&');
+    for (var i = 0; i < paramsArr.length; i++) {
+        results[paramsArr[i].split('=')[0]] = paramsArr[i].split('=')[1];
+    }
+    return results
+}
+
+var url = "http://www.taobao.com/index.php?key0=0&key1=1&key2=2";
+url2obj(url);
+</script>
+
+</html>

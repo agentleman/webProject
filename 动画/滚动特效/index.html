@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>导航动效</title>
+</head>
+<style>
+* {
+    padding: 0;
+    margin: 0;
+}
+header {
+    width: 100%;
+    height: 300px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    background: green;
+
+}
+.header-wrap {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background: red;
+    position: relative;
+}
+.logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 210px;
+    height: 100%;
+    background: orange;
+
+}
+.logo img {
+    width: 100%;
+    margin: 0 auto;
+    /*height: 100%;*/
+}
+.header-nav {
+    position: absolute;
+    left: 500px;
+    width: 800px;
+    height: 100%;
+    background: #4AA28C;
+}
+ul {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #CF239D;
+}
+
+ul li {
+    display: inline-block;
+    width: 100px;
+    height: 100%;
+    text-align: center;
+    line-height: 90px;
+}
+.bottom {
+    width: 100%;
+    height: 1500px;
+    background: #C9683E;
+}
+</style>
+
+<body>
+    <header class="header">
+        <div class="header-wrap">
+            <div class="logo">
+                <img src="./img/gy_logo.png" alt="">
+            </div>
+                <div class="header-nav">
+                    <ul class="nav-content">
+                        <li class="item">首页</li>
+                        <li class="item">关于果园</li>
+                        <li class="item">专业服务</li>
+                        <li class="item">新闻动态</li>
+                    </ul>
+                </div>
+            </div>
+    </header>
+    <div class="bottom"></div>
+</body>
+<script>
+var navigate = document.querySelector('header');
+var navinner = document.querySelector('.header-wrap');
+// document.onmousewheel = function(event) {
+//     var ev = window.event || ev;
+//     console.log(event)
+//     if (ev.deltaY > 0) {
+//         console.log('下', ev.wheelDelta)
+//         navigate.style = "display: none;";
+//     } else if (ev.deltaY < 0) {
+//         console.log('上')
+//         navigate.style = "display: block;";
+//     }
+
+//     if (ev.detail > 0) {
+//         navigate.style = "display: block;";
+//     } else if (ev.detail < 0) {
+//         navigate.style = "display: none;";
+//     }
+// }
+
+var scrollFn = function(ev) {
+	var ev =ev ||window.ev;
+    if (ev.wheelDelta > 0) {
+        navinner.style.display=" block";
+        console.log('上');
+    } else if (ev.wheelDelta < 0) {
+        navinner.style.display="none";
+        console.log('下');
+    }
+    if(ev.detail>0){
+    	navinner.style.display=" none";
+        console.log('上');
+    }else if(ev.detail<0){
+    	 navinner.style.display=" block";
+        console.log('下');
+    }
+}
+
+document.onmousewheel=scrollFn;
+document.addEventListener('DOMMouseScroll',scrollFn,false);//火狐
+// window.attachEvent('onmousewheel',scrollFn,false);
+
+
+
+
+</script>
+
+</html>
