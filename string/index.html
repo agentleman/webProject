@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="button" onclick="showInfo(this);" value="”点击一下”" />
+
+    <button onclick="alert((function(){return this})());">
+      Show inner this
+    </button>
+
+    <input id="demo" type="text" />
+    <button type="button" onclick="myFunction()">检测输入</button>
+    <p id="message"></p>
+
+    <!-- <strong id="log">000</strong> -->
+    <p id="log"></p>
+    <button type="button" onclick="testPromise()">同步异步解耦</button>
+
+    <div id="Circle" style="width:80px;height:80px;border:1px solid black;border-radius:50%;margin: 30px;" ></div>
+    
+  </body>
+  <script src="./index.js"></script>
+  <script src="./promise.js"></script>
+  <script src="./try_cache.js"></script>
+</html>
