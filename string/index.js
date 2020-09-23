@@ -176,7 +176,4 @@ function instace(leftObj,rightObj){
 	}
 }
 
-function aaa (){
-	
-}
-
+let aa = document.getElementsByTagName('div');
